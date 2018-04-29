@@ -6,9 +6,6 @@ function(Species, VariableNamesIn, SubsetVariableNumber, TotPres, VariableSubset
   library(foreach)
   library(doParallel)
   #FunctDirectIn <- "C:/Users/James/Documents/R/win-library/"
-  setwd(FunctDirectIn)
-  # Read in User Defined Functions
-  source("GLMBinomialResp_PredictMatrix_Function.R")
   # Make sure VariableNames is a data frame
   VariableNamesIn <- data.frame(VariableNamesIn, stringsAsFactors=FALSE)
   #
