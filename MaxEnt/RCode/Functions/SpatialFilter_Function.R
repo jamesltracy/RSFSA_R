@@ -17,7 +17,7 @@ SpatialFilter <- function(xy, dist, mapUnits = F) {
     diag(d) <- NA
     close <- (d <= dist)
     diag(close) <- NA
-    closePts <- which(close,arr.ind=T)
+    closePts <- as.matrix(which(close,arr.ind=T))
     discard <- matrix(nrow=2,ncol=2)
     if (nrow(closePts) > 0) {
             while (nrow(closePts) > 0) {
@@ -26,7 +26,7 @@ SpatialFilter <- function(xy, dist, mapUnits = F) {
                 closePts <- closePts[-union(which(closePts[,1] == closePts[1,1]), which(closePts[,2] == closePts[1,1])),]
                 }
             }
-        discard <- discard[complete.cases(discard),]
+        discard <- as.matrix(discard[complete.cases(discard),])
         return(xy[-discard[,1],])
     }
     if (nrow(closePts) == 0) {
