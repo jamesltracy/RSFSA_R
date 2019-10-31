@@ -7,7 +7,7 @@ library(dplyr)
   StatVars <- colnames(EvaluationStats)[StatVarFirstColumn:ncol(EvaluationStats)]
   rownames(EvaluationStats) <- seq(1,nrow(EvaluationStats),1)
   head(EvaluationStats)
-  Freq <- count_(EvaluationStats, vars=SortGroups)
+  Freq <- EvaluationStats %>% group_by_at(vars(one_of((SortGroups)))) %>% summarize(Freq=n())
   if(is.factor(EvaluationStats$Run)) {
     EvaluationStats$Run2 <- as.character(EvaluationStats$Run)
     EvaluationStats$Run2 <- as.numeric(with(EvaluationStats, substring(EvaluationStats$Run2, nchar(EvaluationStats$Run2))))
@@ -31,13 +31,13 @@ library(dplyr)
       Stat <- EvalStatVarSumm[,1:2]
       colnames(Stat) <- c("Statistic", "N")
       Stat$Statistic <- "Mean"
-      Stat$N <- Freq$n
+      Stat$N <- Freq$Freq[1]
     } else {
       EvalStatVarSumm <- ddply(EvaluationStats, SortGroups, numcolwise(sd))
       Stat <- EvalStatVarSumm[,1:2]
       colnames(Stat) <- c("Statistic", "N")
       Stat$Statistic <- "SD"
-      Stat$N <- Freq$n
+      Stat$N <- Freq$Freq[1]
       rownames(Stat) <- rownames(EvalStatVarSumm)
     }
     FirstColNames <- data.frame(c(colnames(EvalStatVarSumm)[1:(StatVarFirstColumn-1)], "Run2"), stringsAsFactors=FALSE)
