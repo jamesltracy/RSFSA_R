@@ -157,7 +157,6 @@ if(AUCrank!=0) {
   AUCTxt <- ""
 }
 RankStatistic <- paste0(AUCTxt, AICTxt)
-
 EvalType <- "psa_corrfilt0.7"
 AnalysisType <- paste0("RSFSA", RankStatistic)
 # Specify Feature Selection Algorithm"
@@ -1231,7 +1230,7 @@ for(j in SetType.Vec) {
       decision.matn <- as.matrix(apply(decision.mat,2,normalizef))
       head(decision.matn)
       ######## Make rank schemes
-      RankStatistic <- "AUC"
+      #RankStatistic <- "AUC"
       AnalysisType <- paste0("RSFSA", RankStatistic)
       ModelName <- paste0("Maxent", DataSet, "_", AnalysisType)
       Model <- paste0(ModelName, TotVars, "Feature Subset")
