@@ -339,7 +339,7 @@ function(Species, VariableNamesIn, PredictorsIn, SubsetVariableNumber, TotPres, 
     # Rejoin coordinates to abspred.df and save as shapefile for checking
     abspred.spdf <- SpatialPointsDataFrame(coords=xy, data=abspred.df, proj4string=CRS.In)
     # Write shapefile including the correct projection
-    writeOGR(abspred.spdf, ".", paste0(Species, "PresenceTestMaxentVals"), driver="ESRI Shapefile", overwrite=TRUE)
+    writeOGR(abspred.spdf, ".", paste0(Species, "AbsenceTestMaxentVals"), driver="ESRI Shapefile", overwrite=TRUE)
     #############################################################################################
     # This section evaluates the Maxent model using the PresenceAbsence package
     #############################################################################################
