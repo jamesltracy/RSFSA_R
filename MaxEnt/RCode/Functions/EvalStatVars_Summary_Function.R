@@ -31,13 +31,13 @@ library(dplyr)
       Stat <- EvalStatVarSumm[,1:2]
       colnames(Stat) <- c("Statistic", "N")
       Stat$Statistic <- "Mean"
-      Stat$N <- Freq$Freq[1]
+      Stat$N <- Freq$Freq[1:nrow(EvalStatVarSumm)]
     } else {
       EvalStatVarSumm <- ddply(EvaluationStats, SortGroups, numcolwise(sd))
       Stat <- EvalStatVarSumm[,1:2]
       colnames(Stat) <- c("Statistic", "N")
       Stat$Statistic <- "SD"
-      Stat$N <- Freq$Freq[1]
+      Stat$N <- Freq$Freq[1:nrow(EvalStatVarSumm)]
       rownames(Stat) <- rownames(EvalStatVarSumm)
     }
     FirstColNames <- data.frame(c(colnames(EvalStatVarSumm)[1:(StatVarFirstColumn-1)], "Run2"), stringsAsFactors=FALSE)
